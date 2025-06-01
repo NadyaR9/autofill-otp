@@ -13,9 +13,11 @@
 if ('OTPCredential' in window) {
   window.addEventListener('DOMContentLoaded', e => {
     const input = document.querySelector('input[autocomplete="one-time-code"]');
+    console.log('input', input);
     if (!input) return;
     const ac = new AbortController();
     const form = input.closest('form');
+    console.log('form', form);
     if (form) {
       form.addEventListener('submit', e => {
         ac.abort();
@@ -25,6 +27,7 @@ if ('OTPCredential' in window) {
       otp: { transport:['sms'] },
       signal: ac.signal
     }).then(otp => {
+      console.log('otp', otp);
       input.value = otp.code;
       if (form) form.submit();
     }).catch(err => {
