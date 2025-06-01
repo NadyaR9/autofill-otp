@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/autofill-input",
+    "build": "vite build --base=/autofill-otp",
     "lint": "eslint .",
     "preview": "vite preview"
   },
