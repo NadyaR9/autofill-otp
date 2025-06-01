@@ -5,10 +5,35 @@
     <link rel="icon" type="image/svg+xml" href="/autofill-otp/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/autofill-otp/assets/index-D6X7lXBi.js"></script>
+    <script type="module" crossorigin src="/autofill-otp/assets/index-D68Cx8Bm.js"></script>
     <link rel="stylesheet" crossorigin href="/autofill-otp/assets/index-D8b4DHJx.css">
   </head>
   <body>
     <div id="root"></div>
+    <input type="text" autocomplete="one-time-code" inputmode="numeric" />
+<script>
+if ('OTPCredential' in window) {
+  window.addEventListener('DOMContentLoaded', e => {
+    const input = document.querySelector('input[autocomplete="one-time-code"]');
+    if (!input) return;
+    const ac = new AbortController();
+    const form = input.closest('form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        ac.abort();
+      });
+    }
+    navigator.credentials.get({
+      otp: { transport:['sms'] },
+      signal: ac.signal
+    }).then(otp => {
+      input.value = otp.code;
+      if (form) form.submit();
+    }).catch(err => {
+      console.log(err);
+    });
+  });
+}
+</script>
   </body>
 </html>
