@@ -3,15 +3,17 @@ import { OTPInput } from './Otp'
 
 function App() {
 
-  return (
-    <div>
-      <form action="/post" method="post">
-        Enter OTP here:
-        <input type="text" autocomplete="one-time-code" inputmode="numeric" name="one-time-code" />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-  )
+  return <OTPInput length={6} onChange={(code) => {
+    console.log('onChange');
+                  if (code.length === 6) {
+                    console.log('onSubmit');
+
+                  }
+                }}
+                hasError={false}
+                resetError={() => {
+                  console.log('resetError')
+                }}/>
 }
 
 export default App
